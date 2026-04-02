@@ -1,4 +1,4 @@
-# cc-python-claude
+# Zero
 
 用 ~5000 行 Python 还原 CC 的核心 Agent Runtime。
 
@@ -109,5 +109,9 @@ uv run python -m cc -c <session-id>
 uv run pytest tests/unit/ -v
 ```
 
+## 交流
 
+对 CC 源码还原或 Agent Runtime 感兴趣？扫码加微信，进 CC 讨论群：
+
+<img src="assets/wechat.jpg" width="300">
 

